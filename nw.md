@@ -1,47 +1,176 @@
-Yes. And I would make one important architectural correction in the prompt: **don’t model every SaaS application as being “inside the org VPC.”** A SaaS service such as JFrog, Snyk, or another hosted platform may live outside your cloud VPC and be accessed through the enterprise identity, SASE/ZTNA, private connectivity, or controlled internet egress path. The diagram should show those distinctions clearly.
+Build a complete **local, interactive enterprise architecture web application** based on the attached architecture diagram.
 
-Here is a prompt you can paste into an AI architecture/diagram generator.
+The attached diagram is the visual and structural reference. Do NOT simply display the image. Recreate the architecture as an interactive web application using HTML/SVG/React components so that every major component can be clicked, expanded, animated, and explored.
 
-Create a highly detailed, enterprise-grade **high-level network, cloud, identity, security, and access architecture diagram** for a large financial-services or regulated enterprise.
+The application is intended as a **learning and interview-preparation tool for a Senior SRE / DevOps / Cloud / Network / Security Engineer**.
 
-The diagram must be understandable to a senior network/security engineer but also structured enough that an entry-level network engineer can follow the complete user-to-application traffic flow.
+The application must run completely locally using:
 
-The primary objective is to show:
+* Node.js
+* npm
+* React
+* TypeScript
+* Vite
+* React Router
+* React Flow or an equivalent interactive diagram library
+* Tailwind CSS
+* Framer Motion for animations
+* Lucide React or equivalent icon library
 
-**Corporate User → Corporate Endpoint → Enterprise Security/Access Layer → Corporate Network / VDI → Identity Provider → Cloud/SaaS Application → Private Cloud Network → Application → Database**
+Do not require a backend.
 
-Also show the reverse/security controls, monitoring, logging, authentication, authorization, and egress controls.
-
-Do NOT assume that every SaaS application is physically inside the corporate VPC. Clearly distinguish between:
-
-1. Corporate/on-premises applications
-2. Private cloud workloads
-3. Public cloud workloads
-4. SaaS applications hosted outside the enterprise
-5. Internet destinations
-
-Use a layered architecture with zoomable detail.
+All architecture information should be represented as structured local data/JSON/TypeScript objects so that components can be reused across AWS, Azure, GCP, SaaS, networking, security, and identity pages.
 
 ---
 
-## 1. END-USER / CORPORATE ENDPOINT LAYER
+# 1. PRIMARY OBJECTIVE
 
-On the far left, show:
+Create an interactive architecture explorer where the user starts on:
 
-### Corporate Users
+**Enterprise Organization — High-Level Network, Cloud, Identity, Security & Access Architecture**
 
-* Corporate desktop/laptop
-* Corporate virtual desktop / VDI
-* Optional managed workstation
-* Do not include mobile users
+The landing page should visually resemble the supplied reference diagram.
 
-Label:
+The user should be able to:
 
-**Corporate User**
+* Zoom in/out
+* Pan around
+* Click major architecture domains
+* Hover over components
+* See descriptions/tooltips
+* Follow animated traffic flows
+* Click AWS → open detailed AWS architecture
+* Click Azure → open detailed Azure architecture
+* Click GCP → open detailed GCP architecture
+* Click Identity → open identity architecture
+* Click SaaS → open SaaS access architecture
+* Click Security → open security architecture
+* Click Observability → open monitoring architecture
+* Click CI/CD / Artifact → open software supply-chain architecture
+* Click a specific service → see what it does and how it connects to other services
 
-Then show endpoint security components installed or enforced on the corporate device/VDI.
+Provide breadcrumb navigation such as:
 
-Examples/options:
+Home
+→ Cloud
+→ AWS
+→ VPC
+→ Private Subnet
+→ EC2
+
+Allow the user to return to the previous architecture level.
+
+---
+
+# 2. LANDING PAGE
+
+Create the landing page as a large architecture canvas.
+
+Title:
+
+**Enterprise Organization — High-Level Network, Cloud, Identity, Security & Access Architecture**
+
+The landing page should have these major zones:
+
+1. Corporate Users / Endpoints
+2. Endpoint Security
+3. SASE / Zero Trust
+4. Enterprise Identity
+5. Corporate Network / VDI
+6. Cloud Connectivity
+7. Cloud Landing Zones
+8. AWS
+9. Azure
+10. GCP
+11. SaaS Applications
+12. Internet Egress
+13. Security & Governance
+14. Observability
+15. Incident Management
+16. CI/CD / Artifact Governance
+17. Privileged Access
+18. Application Layer
+19. Data / Storage Layer
+
+Use visually distinct boundaries for:
+
+* Corporate environment
+* Identity environment
+* Cloud environment
+* SaaS environment
+* Internet
+* Security controls
+* Observability
+
+---
+
+# 3. USER ENTRY FLOW
+
+The most important flow on the landing page is:
+
+Corporate User
+↓
+Corporate Laptop / Desktop
+↓
+Endpoint Security
+↓
+SASE / ZTNA
+↓
+Enterprise Identity Provider
+↓
+MFA / Conditional Access
+↓
+Corporate Network / VDI where applicable
+↓
+Cloud / SaaS access policy
+↓
+AWS / Azure / GCP / SaaS
+
+Animate this flow when the user clicks:
+
+**"Show User Access Flow"**
+
+The animation should highlight each component sequentially.
+
+Display a small explanation panel:
+
+### User Access Flow
+
+1. User starts from a managed corporate endpoint.
+2. Endpoint security validates device posture.
+3. SASE/ZTNA or VPN establishes the appropriate secure access path.
+4. Identity provider authenticates the user.
+5. MFA and conditional-access policies are evaluated.
+6. Authorization determines what the user can access.
+7. Network policy determines the allowed path.
+8. Application-level authentication and authorization are enforced.
+9. Activity is logged and monitored.
+
+Clearly distinguish:
+
+**Authentication = Who are you?**
+
+**Authorization = What are you allowed to access?**
+
+**Network connectivity = How does traffic reach the destination?**
+
+---
+
+# 4. CORPORATE ENDPOINT PAGE
+
+Create a drill-down page:
+
+**Corporate Endpoint Architecture**
+
+Show:
+
+User
+→ Laptop/Desktop
+→ Endpoint Agent
+→ SASE/ZTNA
+→ Enterprise Network
+
+Possible endpoint/security technologies should be displayed as alternatives:
 
 * Palo Alto GlobalProtect
 * Netskope Client
@@ -50,25 +179,29 @@ Examples/options:
 * Microsoft Defender for Endpoint
 * Endpoint DLP
 * EDR
-* Device compliance agent
-* Certificate-based device authentication
-* Browser security controls
+* Device Certificate
+* Device Compliance
 
-Do not imply that all products are simultaneously required. Show them as **possible enterprise technology options**.
+Do not imply all products are deployed simultaneously.
 
-Show:
+Each technology card should contain:
 
-**Managed Endpoint → Endpoint Security / SASE / ZTNA Agent**
-
-Explain visually that the endpoint agent can establish a secure connection to the enterprise security/access layer.
+* What it is
+* Why an enterprise uses it
+* Where it runs
+* What traffic it controls
+* How it interacts with identity
+* Whether it is endpoint, network, identity, or security functionality
 
 ---
 
-## 2. SASE / ZERO-TRUST ACCESS LAYER
+# 5. SASE / ZTNA PAGE
 
-After the endpoint, show a security access layer.
+Create:
 
-Possible technology options:
+**SASE / Zero Trust Access Architecture**
+
+Show alternatives:
 
 * Netskope
 * Zscaler
@@ -76,159 +209,118 @@ Possible technology options:
 * Cloudflare Zero Trust
 * Cisco Secure Access
 
-Label this layer:
+Explain:
 
-**Enterprise SASE / ZTNA / Secure Web Gateway**
-
-Show functions such as:
-
-* User authentication
-* Device posture validation
-* URL filtering
-* DLP
-* Malware inspection
-* TLS inspection where applicable
-* CASB
 * Secure Web Gateway
+* CASB
+* DLP
+* URL filtering
+* Malware inspection
+* TLS inspection
+* ZTNA
+* Device posture
+* Identity-based policy
+* Risk-based access
 * Private application access
-* Internet access policy
-* Identity-based access
-* Location/device/risk-based policies
+* Internet access control
 
-Make clear that this is not necessarily a traditional VPN. Show both:
+Provide two animated flows.
 
-**Traditional VPN option**
+### Traditional VPN
 
-and
+User
+→ VPN Client
+→ VPN Gateway
+→ Corporate Network
+→ Application
 
-**Modern ZTNA/SASE option**
+### Modern ZTNA
 
-as alternative enterprise architectures.
+User
+→ Identity Provider
+→ Device Posture
+→ ZTNA Policy
+→ Private Application
+
+Clearly explain that ZTNA does not necessarily place the user directly onto the entire corporate network.
 
 ---
 
-## 3. CORPORATE IDENTITY / ACCESS MANAGEMENT
+# 6. IDENTITY PAGE
 
-Create a dedicated identity/security section.
+Create:
 
-Show:
+**Enterprise Identity & Access Architecture**
 
-**Enterprise Identity Provider / IdP**
-
-Possible examples:
+Possible IdPs:
 
 * Microsoft Entra ID
 * Okta
 * Ping Identity
 * ADFS for legacy environments
 
-Show authentication mechanisms:
+Show:
+
+User
+→ IdP
+→ MFA
+→ Conditional Access
+→ Application
+
+Authentication protocols:
 
 * SAML 2.0
 * OAuth 2.0
 * OpenID Connect
+
+Identity controls:
+
 * MFA
+* RBAC
+* Group-based access
 * Conditional Access
-* Device compliance
 * Privileged Identity Management
-* Role-Based Access Control
+* Just-in-Time access
+* Service identities
+* Managed identities
+* API credentials
 
-Show the flow:
+Create an interactive explanation:
 
-**User → IdP → MFA / Conditional Access → Application**
+### SAML Example
 
-Explain that authentication and network connectivity are separate concepts.
+User
+→ Enterprise IdP
+→ SAML Assertion
+→ SaaS Application
+→ Application RBAC
 
-For SaaS applications, show:
+### OIDC Example
 
-**User → Enterprise IdP → SAML/OIDC → SaaS Application**
+User
+→ IdP
+→ Authorization Code
+→ Token
+→ Application
 
----
+### OAuth Example
 
-## 4. CORPORATE / ORG NETWORK
+Application
+→ Authorization Server
+→ Access Token
+→ API
 
-Create a large boundary labeled:
-
-**Corporate / Enterprise Network**
-
-Inside it show possible components:
-
-* Corporate WAN
-* SD-WAN
-* Data centers
-* Core network
-* DNS
-* DHCP
-* Proxy
-* Secure Web Gateway
-* Internal applications
-* Internal DNS
-* Active Directory
-* Certificate services
-* SIEM
-* SOC
-* Network monitoring
-
-Show that the enterprise network may connect to cloud environments using:
-
-* Site-to-Site VPN
-* IPSec VPN
-* AWS Direct Connect
-* Azure ExpressRoute
-* Cloud interconnect
-* PrivateLink / private endpoints where applicable
-
-Clearly label these as **connectivity options**, not mandatory components.
+Make these generic architecture examples rather than claiming a specific organization uses one particular protocol.
 
 ---
 
-## 5. VDI / BDI ENVIRONMENT
+# 7. CLOUD LANDING ZONE PAGE
 
-Create a separate section labeled:
+Create:
 
-**Enterprise VDI / BDI Environment**
+**Enterprise Cloud Landing Zone**
 
-Show:
-
-Corporate User
-↓
-Endpoint Security Agent
-↓
-VDI / BDI
-↓
-Enterprise Network / ZTNA
-↓
-Cloud and Corporate Applications
-
-Show that the VDI can provide:
-
-* Controlled enterprise workspace
-* Centralized security policy
-* Restricted internet access
-* Application access
-* Administrative access
-* Privileged access
-
-Possible technologies:
-
-* VMware Horizon
-* Citrix
-* Azure Virtual Desktop
-* AWS WorkSpaces
-
-Again, show these as technology options.
-
----
-
-## 6. CLOUD LANDING ZONE / ORGANIZATIONAL CLOUD STRUCTURE
-
-Create a major cloud governance layer.
-
-Show:
-
-**Enterprise Cloud Organization / Landing Zone**
-
-Under it show separate cloud environments:
+Show three major cloud providers:
 
 ### AWS
 
@@ -246,191 +338,249 @@ Under it show separate cloud environments:
 
 * Entra ID
 * Management Groups
-* Subscriptions
-* Hub-and-Spoke Network
-* Shared Services
-* Production / Non-Production subscriptions
+* Platform subscriptions
+* Connectivity subscription
+* Management subscription
+* Identity subscription
+* Production subscriptions
+* Non-production subscriptions
 
 ### GCP
 
 * Organization
 * Folders
-* Projects
-* Shared VPC
-* Security / Logging projects
+* Shared Services
+* Security
+* Logging
+* Development Projects
+* Test Projects
+* Production Projects
 
-Make it visually clear that AWS, Azure, and GCP are separate cloud environments governed by enterprise policies.
+Explain:
 
----
-
-# 7. AWS NETWORK ARCHITECTURE
-
-Inside the AWS section, create a detailed example VPC.
-
-Show:
-
-**AWS VPC — 10.0.0.0/16**
-
-Across at least two Availability Zones.
-
-### Public Subnets
-
-Show:
-
-* Internet Gateway
-* Application Load Balancer
-* NAT Gateway
-* Bastion Host if required
-
-### Private Application Subnets
-
-Show:
-
-* EC2
-* ECS/EKS workloads
-* Application services
-
-### Private Database Subnets
-
-Show:
-
-* RDS
-* Database EC2
-* Cache/Redis
-
-Show:
-
-**Public Subnet → Internet Gateway**
-
-and:
-
-**Private Subnet → NAT Gateway → Internet Gateway**
-
-Explain visually that NAT Gateway provides outbound internet access for private workloads but does not provide unsolicited inbound internet access.
+**Landing Zone = standardized cloud foundation containing governance, identity, networking, logging, security, and account/subscription/project structure.**
 
 ---
 
-# 8. AWS ROUTING
+# 8. AWS PAGE
 
-Show separate route tables.
+When the user clicks AWS from the landing page, open:
 
-### Public Route Table
+**AWS Enterprise Architecture**
+
+The AWS page should contain an interactive VPC diagram.
 
 Example:
 
+VPC
+**10.0.0.0/16**
+
+Two Availability Zones:
+
+### Availability Zone A
+
+Public Subnet
+Private Application Subnet
+Private Database Subnet
+
+### Availability Zone B
+
+Public Subnet
+Private Application Subnet
+Private Database Subnet
+
+Show:
+
+Internet Gateway
+NAT Gateway
+Route Tables
+Network ACLs
+Security Groups
+Load Balancer
+EC2
+ECS/EKS
+RDS
+ElastiCache/Redis
+VPC Endpoints
+CloudWatch
+CloudTrail
+VPC Flow Logs
+
+---
+
+# 9. AWS VPC DRILL DOWN
+
+When the user clicks:
+
+**VPC**
+
+open:
+
+**AWS VPC — Detailed Architecture**
+
+Explain:
+
+VPC
+→ CIDR
+→ Availability Zones
+→ Subnets
+→ Route Tables
+→ Internet Gateway
+→ NAT Gateway
+→ Security Groups
+→ Network ACLs
+→ VPC Endpoints
+
+Provide interactive cards for each.
+
+For example:
+
+### Internet Gateway
+
+Explain:
+
+* Connects a VPC to the internet
+* Used for internet-routable resources
+* Works with route tables
+* Does not automatically make every resource public
+
+### NAT Gateway
+
+Explain:
+
+* Used primarily for outbound internet connectivity from private subnets
+* Private subnet route table sends default traffic to NAT Gateway
+* NAT Gateway sends traffic toward the Internet Gateway
+* Internet cannot initiate an inbound connection through NAT Gateway to the private resource
+
+### Security Group
+
+Explain:
+
+* Stateful
+* Associated with resources such as EC2
+* Controls allowed inbound/outbound traffic
+
+### Network ACL
+
+Explain:
+
+* Stateless
+* Associated with subnets
+* Supports subnet-level traffic filtering
+
+---
+
+# 10. AWS ROUTING PAGE
+
+Create a dedicated route-table visualization.
+
+Example:
+
+### Public Route Table
+
 10.0.0.0/16 → local
+
 0.0.0.0/0 → Internet Gateway
 
 ### Private Route Table
 
-Example:
-
 10.0.0.0/16 → local
+
 0.0.0.0/0 → NAT Gateway
 
-Show arrows indicating traffic direction.
+Animate packet movement when the user clicks:
+
+**"Show Traffic"**
+
+For example:
+
+Private EC2
+→ Private Route Table
+→ NAT Gateway
+→ Internet Gateway
+→ Internet
+
+Clearly show that this is outbound traffic.
 
 ---
 
-# 9. AWS SECURITY CONTROLS
+# 11. AWS USER ACCESS SCENARIOS
 
-Show security controls at multiple layers.
+Create an interactive scenario selector.
 
-### Network ACL
+### Scenario 1 — User Accesses AWS Console
 
-Subnet-level, stateless filtering.
+User
+→ Corporate Endpoint
+→ SASE/ZTNA
+→ Enterprise IdP
+→ MFA
+→ AWS IAM Identity Center / SSO
+→ AWS Account
+→ AWS Console
 
-### Security Group
-
-Instance/resource-level, stateful filtering.
-
-### AWS WAF
-
-Application-layer protection for web traffic.
-
-### AWS Network Firewall
-
-Network-level inspection where applicable.
-
-### IAM
-
-Identity and authorization.
-
-### GuardDuty
-
-Threat detection.
-
-### Security Hub
-
-Security posture aggregation.
-
-### CloudTrail
-
-API activity logging.
-
-### VPC Flow Logs
-
-Network traffic visibility.
-
-### CloudWatch
-
-Metrics, logs, alarms, dashboards.
-
-Make the diagram distinguish:
-
-**Network Security**
-
-from
-
-**Identity Security**
-
-from
-
-**Application Security**
-
-from
-
-**Monitoring/Security Operations**
+Explain that console authentication and workload network connectivity are separate concepts.
 
 ---
 
-# 10. AZURE NETWORK ARCHITECTURE
+### Scenario 2 — User Accesses Private AWS Application
 
-Create a similar but Azure-specific section.
+User
+→ Endpoint
+→ SASE/ZTNA or VPN
+→ Identity validation
+→ Private access policy
+→ AWS network
+→ Load Balancer
+→ Private Application
+→ Database
+
+---
+
+### Scenario 3 — Administrator Accesses EC2
+
+Admin
+→ MFA
+→ PAM
+→ Bastion / AWS Systems Manager Session Manager
+→ Private EC2
+
+Emphasize:
+
+**Do not expose private EC2 instances directly to the public internet merely for administrative access.**
+
+---
+
+# 12. AZURE PAGE
+
+Create:
+
+**Azure Enterprise Architecture**
 
 Show:
 
-**Azure Landing Zone**
+Management Groups
+→ Subscriptions
+→ Hub VNet
+→ Spoke VNets
 
-with:
+Hub:
 
-* Management Groups
-* Subscriptions
-* Hub VNet
-* Spoke VNets
-* Subnets
 * Azure Firewall
-* Application Gateway / WAF
-* Azure Load Balancer
-* Private Endpoints
-* NSGs
-* Route Tables
-* Azure DNS
 * VPN Gateway
-* ExpressRoute
+* ExpressRoute Gateway
+* DNS
+* Shared Services
 
-Example spoke:
-
-**Application Spoke VNet**
-
-Subnets:
+Spoke:
 
 * Application subnet
 * Integration subnet
-* Private endpoint subnet
+* Private Endpoint subnet
 * Database subnet
 
-Show services such as:
+Services:
 
 * Azure App Service
 * Azure Functions
@@ -439,541 +589,876 @@ Show services such as:
 * Key Vault
 * Service Bus
 * API Management
-* Data Factory
-* Redis
+* Azure Data Factory
+* Azure Cache for Redis
+* Managed Identity
+* Log Analytics
+* Azure Monitor
+
+Make every component clickable.
 
 ---
 
-# 11. PRIVATE ACCESS TO CLOUD SERVICES
+# 13. AZURE USER-TO-APPLICATION FLOW
 
-Show how corporate users reach private cloud services.
+Create scenario:
 
-Possible paths:
-
-### Option A — VPN
-
-Corporate User
-→ VPN Client
-→ Corporate VPN Gateway
-→ Cloud VPN Gateway
-→ VPC/VNet
-→ Private Application
-
-### Option B — Direct Connectivity
-
-Corporate Network
-→ Direct Connect / ExpressRoute
-→ Cloud Hub
-→ Spoke VPC/VNet
-→ Private Application
-
-### Option C — ZTNA
-
-Corporate User
-→ Netskope/Zscaler/Prisma Access
-→ Identity Validation
-→ ZTNA Policy
-→ Private Application
-
-Clearly label these as **alternative access patterns**.
-
----
-
-# 12. BASTION / PRIVILEGED ADMIN ACCESS
-
-Show a separate administrative access path.
-
-Corporate Administrator
+User
+→ Corporate Endpoint
+→ SASE/ZTNA
+→ Entra ID
 → MFA
-→ PAM / Privileged Access Management
-→ Bastion Host / Azure Bastion
-→ Private EC2 / VM
+→ Conditional Access
+→ Application
 
-Possible technologies:
+For a private Azure application:
 
-* AWS Systems Manager Session Manager
-* AWS Bastion Host
-* Azure Bastion
-* CyberArk
-* BeyondTrust
-* Delinea
+User
+→ ZTNA / VPN / ExpressRoute path
+→ Hub VNet
+→ Azure Firewall
+→ Spoke VNet
+→ Application
+→ Private Endpoint / Database
 
-Prefer modern privileged access mechanisms where appropriate.
-
-Show that administrators should NOT directly expose private servers to the public internet.
+Explain where authentication happens and where network traffic travels.
 
 ---
 
-# 13. SAAS APPLICATIONS
+# 14. GCP PAGE
 
-Create a separate section outside the VPC boundary:
+Create:
 
-**Enterprise SaaS Applications**
+**GCP Enterprise Architecture**
+
+Show:
+
+Organization
+→ Folder
+→ Project
+→ Shared VPC
+
+Include:
+
+* VPC
+* Subnets
+* Cloud Router
+* Cloud NAT
+* Firewall Rules
+* Load Balancer
+* Compute Engine
+* GKE
+* Cloud SQL
+* Cloud Storage
+* Secret Manager
+* Cloud Logging
+* Cloud Monitoring
+* IAM
+
+Create drill-down pages for:
+
+GCP Organization
+GCP Project
+VPC
+Subnet
+Firewall
+Cloud NAT
+GKE
+Cloud SQL
+IAM
+
+---
+
+# 15. SAAS ARCHITECTURE PAGE
+
+Important architectural rule:
+
+**Do not place SaaS applications physically inside the enterprise VPC unless the architecture explicitly uses private connectivity.**
+
+Create a separate:
+
+**Enterprise SaaS Access Architecture**
 
 Examples:
 
 * JFrog Artifactory
 * Snyk
-* GitHub Enterprise Cloud
+* GitHub
 * ServiceNow
 * Splunk Cloud
-* Microsoft 365
 * Datadog
+* Microsoft 365
 
-Important:
+Show:
 
-Do NOT draw SaaS applications as if they are necessarily hosted inside the corporate VPC.
-
-Instead show:
-
-**Corporate User → Enterprise IdP → SAML/OIDC → SaaS**
-
-and, where required:
-
-**Cloud Workload → Private Connectivity / Controlled Internet Egress → SaaS API**
-
-For JFrog, show an example:
-
-Developer
+User
 → Enterprise IdP
-→ SAML
-→ JFrog
+→ SAML/OIDC
+→ SaaS
 
-and:
+For workload/API access:
 
 CI/CD Runner
 → HTTPS/API
-→ JFrog Artifactory
+→ SaaS
 
-Show security controls such as:
+Possible network path:
 
-* SSO
-* MFA
-* RBAC
-* API tokens
-* IP restrictions
-* Private connectivity where supported
-* Repository policies
+Workload
+→ NAT / Firewall
+→ Secure Web Gateway / Proxy
+→ Internet
+→ SaaS
+
+Or:
+
+Workload
+→ Private connectivity
+→ SaaS
+
+depending on the SaaS provider's capabilities.
+
+---
+
+# 16. JFROG EXAMPLE
+
+Create a detailed example:
+
+Developer
+→ GitHub
+→ GitHub Actions Runner
+→ Artifactory
+→ Xray
+→ Approved Artifact
+→ Deployment
+
+Show:
+
+* Repository
+* Artifact repository
 * Xray
 * Vulnerability scanning
-* Artifact curation
+* Curation
+* Authentication
+* RBAC
+* API access
+
+Also show:
+
+Direct package download from public internet
+→ Restricted / Blocked
+
+and:
+
+Approved dependency
+→ Artifactory
+→ CI/CD
+
+Explain that Artifactory acts as a controlled artifact/dependency source.
 
 ---
 
-# 14. INTERNET EGRESS CONTROL
+# 17. GITHUB RUNNER EXAMPLE
 
-Create a clearly visible:
+Create a dedicated architecture page:
 
-**Enterprise Internet Egress Security Layer**
+**GitHub Enterprise Self-Hosted Runner Architecture**
 
 Show:
 
-Private Cloud Workload
-→ NAT Gateway / Firewall
-→ Enterprise Proxy / Secure Web Gateway
+Developer
+→ GitHub Enterprise
+→ GitHub Actions
+→ Runner Group
+→ Self-Hosted Runner
+→ AWS EC2 / Azure VM
+
+Runner states:
+
+* Online
+* Offline
+* Busy
+* Idle
+* Failed registration
+* Degraded
+
+Create an animated runner-health dashboard.
+
+Show example Grafana-style panels:
+
+* Total runners
+* Online runners
+* Offline runners
+* Busy runners
+* Idle runners
+* Windows runners
+* Linux runners
+* AIX runners
+* Runner groups
+* Runner availability
+
+Explain the generic data path:
+
+GitHub / GitHub API
+→ Metrics Collection / Automation
+→ Metrics Store
+→ Grafana Dashboard
+
+Do not claim that GitHub itself natively sends all runner metrics directly to Grafana. Present the collector/API/exporter layer explicitly.
+
+---
+
+# 18. INTERNET EGRESS ARCHITECTURE
+
+Create:
+
+**Enterprise Internet Egress Control**
+
+Example:
+
+Private Workload
+→ Route Table
+→ NAT Gateway
+→ Firewall / Proxy / SASE
 → Internet
 
-Possible technologies:
+Show policy:
 
-* Netskope
-* Zscaler
-* Palo Alto Prisma Access
-* AWS Network Firewall
-* Azure Firewall
-* Enterprise Proxy
+Production workloads
+→ Restricted Internet Access
 
-Show that direct uncontrolled internet access from production workloads is restricted.
+Developer workstation
+→ Secure Web Gateway
+→ URL filtering
+→ DLP
+→ Malware inspection
 
-For software dependencies, show:
+Software dependencies:
 
-Application Build
+Build
 → Artifactory
 → Xray / Curation
-→ Approved Artifact
-→ CI/CD Pipeline
+→ Approved Dependency
 
-and explicitly show:
+Avoid:
 
-**Direct Internet Package Download → BLOCKED / RESTRICTED**
-
-Examples:
-
-* npm
-* PyPI
-* Maven
-* NuGet
+Build
+→ Direct Public PyPI/npm/Maven
+→ Uncontrolled dependency
 
 ---
 
-# 15. SECURITY / GOVERNANCE GUARDRAILS
+# 19. SECURITY ARCHITECTURE
 
-Create a dedicated security governance layer across AWS, Azure, GCP, SaaS, and corporate infrastructure.
+Create a security page containing:
 
-Show:
+Identity Security
+Network Security
+Endpoint Security
+Application Security
+Data Security
+Cloud Security
+Supply Chain Security
+
+Controls:
 
 * IAM
 * RBAC
 * MFA
-* Least privilege
 * PAM
-* Secrets management
-* Key Vault
-* AWS Secrets Manager
-* Encryption
+* Secrets Management
 * KMS
-* TLS
+* Encryption
 * DLP
 * CASB
-* Vulnerability management
-* Container scanning
+* WAF
+* Firewall
+* Security Groups
+* NACL
+* Vulnerability Scanning
 * SAST
 * DAST
 * SBOM
-* Artifact scanning
+* Artifact Scanning
 * Policy as Code
-* Cloud security posture management
+* CSPM
 * SIEM
-* SOC
 
-Show centralized logging flowing into:
+Allow the user to click each control and get:
 
-**SIEM / SOC**
-
-Possible tools:
-
-* Splunk
-* Microsoft Sentinel
-* QRadar
+**What it is → Why it exists → Where it operates → Example → What problem it prevents**
 
 ---
 
-# 16. OBSERVABILITY
+# 20. OBSERVABILITY PAGE
 
-Create a centralized observability layer.
+Create:
 
-Show:
+**Enterprise Observability Architecture**
+
+Sources:
 
 Infrastructure Metrics
 Application Metrics
 Logs
 Traces
 Audit Logs
-Network Flow Logs
 Cloud Events
+Network Flow Logs
 
-flowing into:
+→ Collection Layer
 
-**Observability Platform**
+→ Observability Platform
 
 Possible tools:
 
-* Grafana
 * Prometheus
+* Grafana
 * CloudWatch
 * Azure Monitor
 * Log Analytics
 * Splunk
 * Datadog
 
-Include an example from the GitHub platform:
-
-**GitHub Enterprise → GitHub API → Runner Metrics → Metrics Collection → Grafana**
-
-Grafana dashboard should display:
-
-* Windows runners
-* Linux runners
-* AIX runners
-* Online runners
-* Offline runners
-* Busy runners
-* Idle runners
-* Runner groups
-* Runner capacity
-* Runner availability
-* Failed registration
-* Runner health
-
----
-
-# 17. INCIDENT MANAGEMENT
+Again, treat them as alternatives/examples.
 
 Show:
 
-Monitoring / Alert
+Metrics → Dashboards → Alerts → Incident Management
+
+Logs → SIEM → Security Operations
+
+---
+
+# 21. INCIDENT MANAGEMENT PAGE
+
+Create:
+
+Monitoring
 ↓
-Incident Management Platform
+Alert
+↓
+Incident
 ↓
 On-Call Engineer
 ↓
 Incident Bridge
 ↓
-Engineering / Network / Cloud / Security Teams
+Engineering / Network / Cloud / Security
 ↓
 Service Restoration
 ↓
-RCA / Postmortem
+RCA
 ↓
 Preventive Automation
 
-Possible incident tools:
+Possible tools:
 
 * ServiceNow
 * PagerDuty
 * Opsgenie
 * Splunk On-Call
 
-Clearly label them as alternatives.
+Allow the user to click each stage and understand its purpose.
 
 ---
 
-# 18. NEW SAAS ONBOARDING FLOW
+# 22. NEW SAAS ONBOARDING PAGE
 
-Include a dedicated mini-flow showing:
+Create an interactive workflow:
 
-**New SaaS Application Request**
+1. Business Request
+2. Security Review
+3. Architecture Review
+4. Data Classification
+5. Identity / SSO Integration
+6. Network Connectivity Decision
+7. RBAC
+8. DLP / Security Controls
+9. Logging / SIEM
+10. Compliance Review
+11. Production Approval
+12. Go-Live
 
-↓
+When the user clicks each stage, show questions an architect should ask.
 
-Business Requirement
+For example:
 
-↓
+### Network
 
-Security Review
+* Is public internet access acceptable?
+* Does the SaaS support private connectivity?
+* Is IP allowlisting available?
+* Does it require a proxy?
+* Where does traffic originate?
+* Is inbound connectivity required?
+* Is outbound connectivity sufficient?
 
-↓
+### Identity
 
-Architecture Review
+* Does the application support SAML?
+* Does it support OIDC?
+* Does it support SCIM?
+* Is MFA enforced through the enterprise IdP?
+* How are roles mapped?
+* How are service accounts handled?
 
-↓
+### Security
 
-Data Classification
-
-↓
-
-Identity / SSO Integration
-
-↓
-
-Network Connectivity Decision
-
-↓
-
-SASE / Proxy / Private Connectivity Decision
-
-↓
-
-RBAC / Least Privilege
-
-↓
-
-DLP / Security Controls
-
-↓
-
-Logging / SIEM Integration
-
-↓
-
-Vulnerability / Compliance Review
-
-↓
-
-Production Approval
-
-↓
-
-SaaS Onboarding
-
-This should visually answer:
-
-**“If tomorrow we introduce a new SaaS application, how does it become part of the enterprise architecture?”**
+* What data is stored?
+* Where is the data hosted?
+* Is encryption supported?
+* Are audit logs available?
+* Can logs be integrated with SIEM?
+* Does the vendor provide vulnerability/compliance reports?
 
 ---
 
-# 19. USER LOGIN FLOW
+# 23. GLOBAL ANIMATION SYSTEM
 
-Show a detailed numbered flow:
+Create a reusable traffic animation engine.
 
-1. User starts on managed corporate laptop.
-2. Endpoint security agent validates device posture.
-3. SASE/ZTNA client establishes secure access.
-4. User authenticates against enterprise IdP.
-5. MFA / conditional access is evaluated.
-6. User receives authorization based on role/group.
-7. User requests AWS/Azure/SaaS application.
-8. Access policy determines whether the application is reachable.
-9. Traffic follows the appropriate private or controlled internet path.
-10. Application authenticates the user using SAML/OIDC where applicable.
-11. Application enforces RBAC.
-12. Activity is logged.
-13. Security/observability platforms receive relevant telemetry.
+Traffic types:
 
-Use arrows to clearly distinguish:
+### Blue
 
-**Authentication**
+User/application traffic
 
-from
+### Purple
 
-**Authorization**
+Authentication/identity
 
-from
+### Orange
 
-**Network Connectivity**
+Management/admin traffic
 
-from
+### Green
 
-**Application Access**
+Monitoring/logging/telemetry
 
----
+### Red
 
-# 20. REQUIRED DIAGRAM LEGEND
+Security/block/denied traffic
 
-At the bottom, create a comprehensive legend explaining:
+### Dashed
 
-* VPC
-* VNet
-* Subnet
-* Route Table
-* Internet Gateway
-* NAT Gateway
-* VPN
-* Direct Connect
-* ExpressRoute
-* Security Group
-* Network ACL
-* Firewall
-* Proxy
-* SASE
-* ZTNA
-* IdP
-* SAML
-* OIDC
-* MFA
-* PAM
-* Bastion
-* Private Endpoint
-* Load Balancer
-* WAF
-* SIEM
-* SaaS
-* API Gateway
-* PrivateLink
+Optional or alternative path
 
-Use different visual styles for:
+When the user clicks:
 
-**Network boundary**
+**Play User Flow**
 
-**Security boundary**
+animate:
 
-**Identity boundary**
-
-**Cloud boundary**
-
-**SaaS boundary**
-
-**Internet boundary**
-
----
-
-# 21. TRAFFIC FLOWS TO SHOW
-
-Use numbered arrows for these example flows:
-
-### User → AWS Console
-
-Corporate Laptop
-→ SASE/ZTNA
-→ Enterprise IdP
-→ MFA
-→ AWS IAM Identity Center / SSO
-→ AWS Account
-→ AWS Console
-
-### User → Azure
-
-Corporate Laptop
-→ SASE/ZTNA
-→ Entra ID
-→ MFA
-→ Azure Subscription
-→ Azure Portal / Resource
-
-### User → SaaS
-
-Corporate Laptop
-→ SASE
-→ Enterprise IdP
-→ SAML/OIDC
-→ SaaS
-
-### Developer → GitHub
-
-Corporate Laptop
+User
+→ Endpoint
 → SASE
 → IdP
-→ GitHub Enterprise
+→ Cloud
+→ Application
 
-### GitHub Runner → AWS
+When clicking:
 
-GitHub Runner
-→ AWS Private Network
-→ Application / AWS API
+**Play Authentication Flow**
 
-### GitHub Runner → JFrog
+animate:
 
-GitHub Runner
-→ Controlled HTTPS Egress / Private Connectivity
-→ JFrog Artifactory
+User
+→ IdP
+→ MFA
+→ Token/SAML Assertion
+→ Application
 
-### Private EC2 → Internet
+When clicking:
 
-EC2 Private Subnet
-→ Route Table
-→ NAT Gateway
-→ Firewall / Proxy where applicable
-→ Internet
+**Play Application Traffic**
 
-### Administrator → Private EC2
+animate:
 
-Administrator
-→ MFA/PAM
-→ Bastion or SSM Session Manager
-→ Private EC2
+User
+→ Load Balancer
+→ Application
+→ Database
+
+When clicking:
+
+**Play Monitoring Flow**
+
+animate:
+
+Application
+→ Metrics/Logs
+→ Collector
+→ Observability
+→ Alert
+→ Incident Management
+
+When clicking:
+
+**Play Security Block**
+
+animate:
+
+Workload
+→ Unauthorized Internet Destination
+→ Firewall/Proxy
+→ BLOCKED
 
 ---
 
-## VISUAL REQUIREMENTS
+# 24. SERVICE DETAILS PANEL
 
-Create this as a professional enterprise architecture diagram suitable for a senior SRE, cloud architect, network engineer, or security architect interview.
+Every major node should open a reusable detail panel.
 
-Use a clean left-to-right architecture.
+Example:
 
-Use nested boundaries.
+### AWS NAT Gateway
 
-Use clear AWS, Azure, GCP, SaaS, identity, security, networking, and observability zones.
+**Category:** Networking
 
-Use arrows with different styles for:
+**Purpose:** Provides outbound connectivity from private subnets.
 
-* User traffic
-* Management traffic
-* API traffic
-* Authentication
-* Logging/telemetry
-* Internet egress
+**Located in:** Public subnet.
 
-Use concise labels but enough detail that zooming into the diagram reveals additional architecture information.
+**Receives traffic from:** Private subnet route table.
 
-Avoid making the diagram visually crowded. Use grouped components and callouts.
+**Connects to:** Internet Gateway.
 
-The final architecture should allow someone to trace this complete path visually:
+**Inbound internet initiated connection:** Not permitted through NAT Gateway.
 
-**Corporate User → Endpoint Security → SASE/ZTNA → Corporate Network/VDI → Enterprise Identity → Cloud/SaaS Access → Cloud Landing Zone → VPC/VNet → Subnet → Route Table → Firewall/NACL/Security Group → Application → Database**
+**Common use case:** Private EC2 instances downloading approved updates or accessing external services.
 
-Also show the alternative paths for VPN, Direct Connect/ExpressRoute, private endpoints, bastion/PAM, and controlled internet/SaaS access.
+**Interview question:**
+"Why would you use NAT Gateway instead of an Internet Gateway directly from a private subnet?"
 
-The diagram should explicitly communicate the enterprise security principle:
+Provide a concise answer.
 
-**Identity + Device Trust + Least Privilege + Network Segmentation + Controlled Egress + Continuous Monitoring + Centralized Logging**
+Use this same format for all major services.
 
-Do not assume one vendor is mandatory. Where appropriate, show technology choices as alternatives rather than claiming all products are deployed simultaneously.
+---
+
+# 25. INTERVIEW MODE
+
+Add a toggle:
+
+**Architecture Mode | Interview Mode**
+
+In Interview Mode, clicking a component displays:
+
+* What is it?
+* Why is it used?
+* Where does it sit?
+* What connects to it?
+* What security controls apply?
+* Common failure scenarios
+* Interview question
+* 30-second answer
+
+Example:
+
+### Interview Question
+
+"What is the difference between a Security Group and Network ACL?"
+
+Show a concise interview-ready answer.
+
+This mode is extremely important because this application is intended for interview preparation.
+
+---
+
+# 26. SEARCH
+
+Add global search.
+
+Search terms such as:
+
+VPC
+NAT Gateway
+SAML
+OIDC
+VPN
+ExpressRoute
+Direct Connect
+Security Group
+NACL
+Terraform
+JFrog
+Xray
+GitHub Actions
+Runner
+Grafana
+SaaS
+IdP
+MFA
+Bastion
+Private Endpoint
+
+should locate the component and navigate to its architecture page.
+
+---
+
+# 27. ARCHITECTURE RELATIONSHIP GRAPH
+
+Every service should contain relationship information.
+
+Example:
+
+EC2:
+
+dependsOn:
+
+* VPC
+* Subnet
+* Route Table
+* Security Group
+
+connectsTo:
+
+* Load Balancer
+* RDS
+* NAT Gateway
+
+observedBy:
+
+* CloudWatch
+* CloudTrail
+* VPC Flow Logs
+
+This should allow the application to display:
+
+**"What connects to this component?"**
+
+---
+
+# 28. RESPONSIVE DESIGN
+
+Desktop should provide the full architecture canvas.
+
+Tablet should provide a simplified architecture view.
+
+Mobile should convert the architecture into expandable cards and flows rather than trying to display the entire diagram simultaneously.
+
+Use:
+
+* Zoom
+* Pan
+* Collapse/expand
+* Breadcrumbs
+* Search
+* Side panel
+* Modal details
+
+---
+
+# 29. DESIGN LANGUAGE
+
+The visual style should resemble a professional enterprise architecture tool.
+
+Use:
+
+* White/light background
+* Dark text
+* AWS orange accents
+* Azure blue accents
+* GCP multicolor accents
+* Security red
+* Identity purple
+* Observability green
+* Network blue
+
+Use subtle borders and shadows.
+
+Avoid excessive decoration.
+
+The architecture must remain readable.
+
+---
+
+# 30. IMPORTANT ARCHITECTURAL ACCURACY RULES
+
+Do not make these mistakes:
+
+1. Do not put SaaS applications inside the enterprise VPC by default.
+2. Do not imply that authentication automatically provides network connectivity.
+3. Do not imply that NAT Gateway allows inbound internet access to private workloads.
+4. Do not confuse Security Groups with Network ACLs.
+5. Do not confuse SAML authentication with network connectivity.
+6. Do not treat ZTNA as necessarily equivalent to a traditional VPN.
+7. Do not imply that every AWS resource must be in a public subnet.
+8. Do not expose private EC2/database resources directly to the internet.
+9. Do not claim that GitHub automatically provides every Grafana metric without an API/exporter/collector layer.
+10. Do not assume every organization uses every vendor shown.
+11. Clearly label vendor technologies as examples/options when appropriate.
+12. Distinguish control-plane/API traffic from application/data-plane traffic wherever useful.
+
+---
+
+# 31. PROJECT STRUCTURE
+
+Create a clean project structure similar to:
+
+src/
+components/
+ArchitectureCanvas
+ArchitectureNode
+DetailPanel
+FlowAnimation
+ServiceCard
+Breadcrumbs
+Search
+Legend
+InterviewMode
+pages/
+Home
+Aws
+Azure
+Gcp
+Identity
+Network
+Security
+Saas
+Observability
+Github
+IncidentManagement
+Onboarding
+data/
+aws.ts
+azure.ts
+gcp.ts
+identity.ts
+network.ts
+security.ts
+saas.ts
+github.ts
+flows/
+userAccess.ts
+authentication.ts
+applicationTraffic.ts
+monitoring.ts
+securityBlock.ts
+types/
+architecture.ts
+App.tsx
+main.tsx
+
+Use reusable components rather than duplicating architecture code.
+
+---
+
+# 32. REQUIRED NPM COMMANDS
+
+The generated project must support:
+
+npm install
+
+npm run dev
+
+npm run build
+
+npm run preview
+
+The application must run locally without requiring a backend.
+
+---
+
+# 33. FINAL ACCEPTANCE TEST
+
+After implementation, verify these flows:
+
+### Test 1
+
+Open Home.
+
+The complete enterprise architecture is visible.
+
+### Test 2
+
+Click AWS.
+
+AWS architecture opens.
+
+### Test 3
+
+Click VPC.
+
+VPC details open.
+
+### Test 4
+
+Click NAT Gateway.
+
+NAT Gateway details and traffic flow appear.
+
+### Test 5
+
+Click Azure.
+
+Azure landing zone appears.
+
+### Test 6
+
+Click GCP.
+
+GCP organization/project/VPC architecture appears.
+
+### Test 7
+
+Click JFrog.
+
+SaaS architecture and authentication flow appear.
+
+### Test 8
+
+Click Identity.
+
+SAML/OIDC/MFA flows appear.
+
+### Test 9
+
+Click "Play User Flow."
+
+The user-to-application path animates.
+
+### Test 10
+
+Click "Play Monitoring Flow."
+
+Metrics/logs flow toward observability and incident management.
+
+### Test 11
+
+Enable Interview Mode.
+
+Clicking a service provides an interview-ready explanation.
+
+### Test 12
+
+Search for "NAT Gateway."
+
+The application navigates directly to the relevant architecture and highlights the component.
+
+---
+
+# 34. MOST IMPORTANT UX REQUIREMENT
+
+The landing page should answer:
+
+**"How does a corporate user get from their laptop to an AWS/Azure/GCP/SaaS application?"**
+
+Then the drill-down pages should answer:
+
+**"What happens inside the cloud?"**
+
+Then the service pages should answer:
+
+**"What does each component do?"**
+
+Then Interview Mode should answer:
+
+**"How do I explain this to an interviewer?"**
+
+The user should be able to move naturally through:
+
+**Organization → User → Endpoint → Security → Identity → Network → Cloud → VPC/VNet → Subnet → Application → Database → Monitoring → Security → Incident**
+
+The final result should feel like an interactive **enterprise architecture map + cloud/network learning tool + SRE interview preparation application**, rather than a static diagram.
